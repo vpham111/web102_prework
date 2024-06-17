@@ -29,6 +29,18 @@ const gamesContainer = document.getElementById("games-container");
 function addGamesToPage(games) {
 
     // loop over each item in the data
+    for (let i = 0; i < games.length; i++) {
+        const gameDiv = document.createElement('div')
+        gameDiv.classList.add("game-card")
+
+        gameDiv.innerHTML = `
+        <img src="${games[i].img}" class="game-img" >
+        <h2>${games[i].name}</h2>
+        <p>${games[i].description}</p>
+        `
+
+        gamesContainer.appendChild(gameDiv)
+    }
 
 
         // create a new div element, which will become the game card
@@ -47,6 +59,7 @@ function addGamesToPage(games) {
 
 }
 
+addGamesToPage(GAMES_JSON)
 // call the function we just defined using the correct variable
 // later, we'll call this function using a different list of games
 
@@ -61,21 +74,31 @@ function addGamesToPage(games) {
 const contributionsCard = document.getElementById("num-contributions");
 
 // use reduce() to count the number of total contributions by summing the backers
-
+const totalBackers = GAMES_JSON.reduce((total, game) => {
+    return total + game.backers;
+}, 0)
 
 // set the inner HTML using a template literal and toLocaleString to get a number with commas
-
+contributionsCard.innerHTML = `
+<h2>${totalBackers}</h2>`
 
 // grab the amount raised card, then use reduce() to find the total amount raised
 const raisedCard = document.getElementById("total-raised");
 
-// set inner HTML using template literal
+const totalRaised = GAMES_JSON.reduce((total, game) => {
+    return total + game.pledged;
+}, 0)
 
+// set inner HTML using template literal
+raisedCard.innerHTML = `
+<h2>${totalRaised}</h2>`
 
 // grab number of games card and set its inner HTML
 const gamesCard = document.getElementById("num-games");
 
-
+const totalGames = GAMES_JSON.length
+gamesCard.innerHTML = `
+<h2>${totalGames}</h2>`
 /*************************************************************************************
  * Challenge 5: Add functions to filter the funded and unfunded games
  * total number of contributions, amount donated, and number of games on the site.
