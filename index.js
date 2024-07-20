@@ -200,3 +200,4 @@ firstGameContainer.appendChild(topPledged)
 const runnerUp = document.createElement('h4')
 runnerUp.innerHTML  = second.name
 secondGameContainer.appendChild(runnerUp)
+filterFundedOnly()
